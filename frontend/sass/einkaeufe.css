@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400");
+html, body {
+  font-family: 'Roboto', sans-serif; }
+
+header nav .nav-wrapper {
+  background-color: #2196f3; }
+  header nav .nav-wrapper .brand-logo {
+    margin-left: 2%;
+    font-weight: 300; }
+    @media only screen and (max-width: 992px) {
+      header nav .nav-wrapper .brand-logo {
+        text-align: center;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%); } }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; }
+
+main {
+  flex: 1 0 auto; }
+
+footer.page-footer {
+  padding-top: 0 !important;
+  background-color: #2196f3 !important; }
+
+table {
+  width: 100%; }
+
+main h2 {
+  font-weight: 300; }
+
+/*# sourceMappingURL=einkaeufe.css.map */

@@ -1,0 +1,17 @@
+header {
+  nav {
+    .nav-wrapper {
+      background-color: #2196f3;
+      .brand-logo {
+        margin-left: 2%;
+        font-weight: 300;
+        @media only screen and (max-width: 992px) {
+          text-align: center;
+          left: 50%;
+          -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>LabCode KBB | Abschluss&uuml;bersicht</title>
+    <link rel="stylesheet" href="sass/abschluss.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css"
+          integrity="sha256-zvFVp826siCUuxc2KZRdlkALzLZWNb7FaJm9K1mRxW0=" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"
+            integrity="sha256-T6iGJTr91LvmSE0OD+GJ79ArVNS0JClRUKJuTPDr0ac=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"
+            integrity="sha256-CfcERD4Ov4+lKbWbYqXD6aFM9M51gN4GUEtDhkWABMo=" crossorigin="anonymous"></script>
+    <script src="js/general.js"></script>
+    <script src="js/abschluss.js"></script>
+</head>
+<body>
+<header>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="index.html" class="brand-logo left">LBCD KBB</a>
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="einkaeufe.html">Eink&auml;ufe</a></li>
+                <li class="active"><a href="abschluss.html">Abschlussübersicht</a></li>
+
+            </ul>
+        </div>
+    </nav>
+    <ul class="sidenav" id="mobile-nav">
+        <li><a href="einkaeufe.html">Eink&auml;ufe</a></li>
+        <li class="active"><a href="abschluss.html">Abschlussübersicht</a></li>
+    </ul>
+</header>
+<main>
+    <h2 class="center">Abschluss</h2>
+    <div class="container">
+        <div id="nochzuBerechnen" class="hidden">
+            <div class="center">
+                <h5>Abschlussberechnung erstellen</h5>
+                <a id="erstellen-a" style="background-color: #F39237; color: #000000; margin: 5vh auto 0 auto" class="btn">Abschlussberechnung erstellen</a>
+            </div>
+        </div>
+        <div id="bereitsBerechnet" class="hidden">
+            <h5 class="center">Wer bist du?</h5>
+            <div class="row">
+                <div class="input-field col s12 m6 offset-m3">
+                    <select id="select-familien">
+                        <option value="" disabled selected>Auswahl ...</option>
+                    </select>
+                    <label>Wáhle deine Familie aus</label>
+                </div>
+            </div>
+        </div>
+        <div id="ergebnis">
+        </div>
+        <div class="preloader-wrapper hidden big active" style="margin: 17.5vh auto 0; display: block">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            <span id="footer_copyright">
+                © 2018 <a class="white-text" href="https://labcode.de">LabCode</a>
+            </span>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
