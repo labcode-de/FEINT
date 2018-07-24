@@ -35,7 +35,7 @@ $(function () {
                         gesAusgaben += einkauf.betrag;
                         if (parseInt(dataI) + 1 === data.length) {
                             $('.collapsible').collapsible();
-                            $('#summeEinkaeufe').html((Math.round(gesAusgaben) * 100) / 100);
+                            $('#summeEinkaeufe').html((Math.round(gesAusgaben * 100) / 100));
                         }
                     }
                 }
