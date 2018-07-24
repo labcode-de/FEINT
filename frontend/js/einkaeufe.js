@@ -28,7 +28,7 @@ $(function () {
                                 '  <div class="collapsible-header">Am ' + datum + ' bei ' + einkauf.ort + ' (<b>' + einkauf.betrag + ' &euro; / ' + einkauf.familienName + '</b>)</div>' +
                                 '  <div class="collapsible-body">' +
                                 //'   Familie ' + einkauf.familienName + ' hat bei ' + einkauf.ort + ' f&uuml;r <b>' + einkauf.betrag + '€</b> eingekauft.' +
-                                '   <br><br><a href="https://kbb-server.labcode.tech/bonImages/' + einkauf.bon + '"><img src="https://kbb-server.labcode.tech/bonImages/' + einkauf.bon + '" width="75%" style="margin: auto; display: block;" /></a>' +
+                                '   <a href="https://kbb-server.labcode.tech/bonImages/' + einkauf.bon + '"><img src="https://kbb-server.labcode.tech/bonImages/' + einkauf.bon + '" width="75%" style="margin: auto; display: block;" /></a>' +
                                 '</div>' +
                                 '</li>')
                         }
