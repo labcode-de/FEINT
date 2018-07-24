@@ -34,5 +34,19 @@ table {
 
 main h2 {
   font-weight: 300; }
+main .modal {
+  max-height: 80% !important; }
+  main .modal h4, main .modal h5 {
+    text-align: center;
+    font-weight: 300; }
+
+.file-field {
+  display: block;
+  max-width: 75%;
+  margin: auto; }
+  .file-field .btn {
+    float: none !important;
+    display: block;
+    margin: auto; }
 
 /*# sourceMappingURL=einkaeufe.css.map */

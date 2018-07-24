@@ -13,6 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js" integrity="sha256-CfcERD4Ov4+lKbWbYqXD6aFM9M51gN4GUEtDhkWABMo=" crossorigin="anonymous"></script>
     <script src="js/general.js"></script>
     <script src="js/einkaeufe.js"></script>
+    <script src="js/modals.js"></script>
 </head>
 <body>
 <header>
@@ -40,6 +41,64 @@
     <div class="container">
         <ul class="collapsible" id="collapsible-einkaeufe">
         </ul>
+    </div>
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red modal-trigger" href="#modal-addEinkaufReceipt">
+            <i class="large material-icons">add</i>
+        </a>
+        <!--<ul>-->
+        <!--<li><a class="btn-floating deep-purple darken-1 modal-trigger" href="#modal-addEinkaufReceipt"><i-->
+        <!--class="material-icons">receipt</i></a></li>-->
+        <!--&lt;!&ndash;<li><a class="btn-floating green modal-trigger " href="#modal-addEinkauf"><i class="material-icons">edit</i></a>&ndash;&gt;-->
+        <!--</li>-->
+        <!--</ul>-->
+    </div>
+    <div id="modal-addEinkaufReceipt" class="modal">
+        <form enctype="multipart/form-data" method="post" action="https://kbb-server.labcode.tech/addKassenbon">
+            <div class="modal-content">
+                <h4>Kassenbeleg</h4>
+                <!--<h5>mit Kassenbon</h5>-->
+                <input type="hidden" class="orig_url" name="orig_url" />
+                <div class="row">
+                    <div class="col s12">
+                        <div class="file-field input-field">
+                            <div style="background-color: #F39237; color: #000000;" class="btn">
+                                <span>Kassenbon-Foto</span>
+                                <input required type="file" name="kassenbon">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input required class="file-path validate" type="hidden">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 input-field">
+                        <input type="text" id="date" name="date" class="datepicker">
+                        <label for="date">Belegdatum</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 input-field">
+                        <select required name="familienName" class="select-familien">
+                            <option value="" disabled selected>Familie ausw&auml;hlen</option>
+                        </select>
+                        <label>Familienauswahl</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <input id="betrag" required name="betrag" type="number" step="0.01"
+                               class="validate">
+                        <label for="betrag">Betrag</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="ort" required name="ort" type="text" class="validate">
+                        <label for="ort">Ort</label>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </main>
 <footer class="page-footer">
