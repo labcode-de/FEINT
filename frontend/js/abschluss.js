@@ -52,7 +52,7 @@ $(function () {
             success: (data) => {
                 console.log(data);
                 if (data.transaktionen[0].bezahlen) {
-                    $('#ergebnis').html('<h6 class="center">Soll/Ist/Differenz (' + data.sollAusgaben + ' &euro; / ' + data.istAusgaben + ' &euro; / ' + data.difference + '&euro;)</h6>' +
+                    $('#ergebnis').html('<h6 class="center">Soll / Ist / Differenz (' + data.sollAusgaben + ' &euro; / ' + data.istAusgaben + ' &euro; / ' + data.difference + '&euro;)</h6>' +
                         '<h5 class="center thin">Du musst bezahlen!</h5>' +
                         '<table class="centered responsive-table0">' +
                         '                <thead>' +
@@ -64,7 +64,7 @@ $(function () {
                         '<tbody id="ergebnis-table"></tbody>' +
                         '            </table>')
                 } else {
-                    $('#ergebnis').html('<h6 class="center">Soll/Ist/Differenz (' + data.sollAusgaben + ' &euro; / ' + data.istAusgaben + ' &euro; / ' + data.difference + '&euro;)</h6>' +
+                    $('#ergebnis').html('<h6 class="center">Soll / Ist / Differenz (' + data.sollAusgaben + ' &euro; / ' + data.istAusgaben + ' &euro; / ' + data.difference + '&euro;)</h6>' +
                         '<h5 class="center thin">Du bekommst Geld!</h5>' +
                         '<table class="centered responsive-table0">' +
                         '                <thead>' +
