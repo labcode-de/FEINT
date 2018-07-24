@@ -20,7 +20,6 @@ function genString() {
     return text;
 }
 
-console.log(makeid());
 var upload = multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
