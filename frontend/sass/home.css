@@ -2,6 +2,9 @@
 html, body {
   font-family: 'Roboto', sans-serif; }
 
+h6 {
+  font-size: 1.05rem !important; }
+
 header nav .nav-wrapper {
   background-color: #2196f3; }
   header nav .nav-wrapper .brand-logo {
