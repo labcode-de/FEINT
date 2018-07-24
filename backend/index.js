@@ -10,13 +10,24 @@ const dbName = "labcodeKBB";
 var multer = require('multer');
 var sha256 = require('crypto-js/sha256');
 var path = require('path')
+function genString() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 15; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
+console.log(makeid());
 var upload = multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
             cb(null, path.join(__dirname, '/public/bonImages'))
         },
         filename: (req, file, cb) => {
-            let customFileName = sha256(file.originalname.split('.')[0]),
+            let customFileName = sha256(file.originalname.split('.')[0] + genString()),
                 fileExtension = file.originalname.split('.')[1] // get file extension from original file name
             cb(null, customFileName + '.' + fileExtension)
         }
