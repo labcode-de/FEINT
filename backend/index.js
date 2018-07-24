@@ -80,7 +80,8 @@ MongoClient.connect(dbURL, function (err, mongoClient) {
                         einkaeufe: {
                             betrag: betrag,
                             ort: rb.ort,
-                            bon: req.file.filename
+                            bon: req.file.filename,
+                            timestamp: new Date(rb.date)
                         }
                     }
                 }, (err) => {
@@ -92,7 +93,7 @@ MongoClient.connect(dbURL, function (err, mongoClient) {
                             betrag: betrag,
                             ort: rb.ort,
                             bon: req.file.filename,
-                            timestamp: new Date
+                            timestamp: new Date(rb.date)
                         }, (err) => {
                             if (err) {
                                 res.status(500).send("db error " + err)

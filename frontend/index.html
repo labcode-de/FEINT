@@ -51,41 +51,47 @@
         </table>
     </div>
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red">
+        <a class="btn-floating btn-large red modal-trigger" href="#modal-addEinkaufReceipt">
             <i class="large material-icons">add</i>
         </a>
-        <ul>
-            <li><a class="btn-floating deep-purple darken-1 modal-trigger" href="#modal-addEinkaufReceipt"><i
-                    class="material-icons">receipt</i></a></li>
-            <li><a class="btn-floating green modal-trigger" href="#modal-addEinkauf"><i class="material-icons">edit</i></a>
-            </li>
-        </ul>
+        <!--<ul>-->
+            <!--<li><a class="btn-floating deep-purple darken-1 modal-trigger" href="#modal-addEinkaufReceipt"><i-->
+                    <!--class="material-icons">receipt</i></a></li>-->
+            <!--&lt;!&ndash;<li><a class="btn-floating green modal-trigger " href="#modal-addEinkauf"><i class="material-icons">edit</i></a>&ndash;&gt;-->
+            <!--</li>-->
+        <!--</ul>-->
     </div>
     <div id="modal-addEinkaufReceipt" class="modal">
         <form enctype="multipart/form-data" method="post" action="https://kbb-server.labcode.tech/addKassenbon">
             <div class="modal-content">
-                <h4>Einkauf hinzuf&uuml;gen</h4>
-                <h5>mit Kassenbon</h5>
+                <h4>Kassenbeleg</h4>
+                <!--<h5>mit Kassenbon</h5>-->
                 <input type="hidden" class="orig_url" name="orig_url" />
+                <div class="row">
+                    <div class="col s12">
+                        <div class="file-field input-field">
+                            <div style="background-color: #F39237; color: #000000;" class="btn">
+                                <span>Kassenbon-Foto</span>
+                                <input required type="file" name="kassenbon">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input required class="file-path validate" type="hidden">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 input-field">
+                        <input type="text" id="date" name="date" class="datepicker">
+                        <label for="date">Belegdatum</label>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col s12 input-field">
                         <select required name="familienName" class="select-familien">
                             <option value="" disabled selected>Familie ausw&auml;hlen</option>
                         </select>
                         <label>Familienauswahl</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                        <div class="file-field input-field">
-                            <div style="background-color: #F39237; color: #000000;" class="btn">
-                                <span>Kassenbon-Bild</span>
-                                <input required type="file" name="kassenbon">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -101,7 +107,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button href="#!" style="background-color: #1B7A0C; color: #FFFFFF; margin: auto"
+                <button href="#!" style="background-color: #1B7A0C; color: #FFFFFF; margin: auto; display: block;"
                         class="center waves-effect btn-flat">Einkauf hinzuf&uuml;gen
                 </button>
             </div>
