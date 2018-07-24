@@ -2,7 +2,7 @@ $(function () {
     $.ajax({
         url: "https://kbb-server.labcode.tech/getEinkaeufe",
         success: (data) => {
-            data = data.sort(function(a,b){
+            data = data.sort(function (a, b) {
                 // Turn your strings into dates, and then subtract them
                 // to get a value that is either negative, positive, or zero.
                 return new Date(a.timestamp) - new Date(b.timestamp);
@@ -10,12 +10,13 @@ $(function () {
             if (data.length === 0) {
                 $('#collapsible-einkaeufe').html('Bisher wurde nichts eingekauft!')
             } else {
+                let gesAusgaben = 0;
                 for (let dataI in data) {
                     if (data.hasOwnProperty(dataI)) {
                         const einkauf = data[dataI];
                         const dateObj = new Date(einkauf.timestamp);
                         const datum = dateObj.getDate().toString() + '.' + dateObj.getMonth().toString() + ".";
-                        if(einkauf.bon === "") {
+                        if (einkauf.bon === "") {
                             $('#collapsible-einkaeufe').append(
                                 '<li>' +
                                 '  <div class="collapsible-header">Am ' + datum + ' bei ' + einkauf.ort + ' (<b>' + einkauf.betrag + ' &euro; / ' + einkauf.familienName + '</b>)</div>' +
@@ -31,8 +32,10 @@ $(function () {
                                 '</div>' +
                                 '</li>');
                         }
-                        if(parseInt(dataI) + 1 === data.length) {
+                        gesAusgaben += einkauf.betrag;
+                        if (parseInt(dataI) + 1 === data.length) {
                             $('.collapsible').collapsible();
+                            $('#summeEinkaeufe').html(gesAusgaben);
                         }
                     }
                 }
