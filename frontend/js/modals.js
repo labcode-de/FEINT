@@ -65,4 +65,16 @@ $(function () {
         }
     });
     $('.orig_url').val(window.location.href);
+    $.ajax({
+        url: "https://kbb-server.labcode.tech/getFamilien",
+        success: (data) => {
+            data = data.sort();
+            for (let dataI in data) {
+                $('.select-familien').append('<option value="' + data[dataI] + '">' + data[dataI] + '</option>');
+                if (parseInt(dataI) + 1 === parseInt(data.length)) {
+                    $('select').formSelect();
+                }
+            }
+        }
+    })
 });
