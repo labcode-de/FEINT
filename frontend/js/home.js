@@ -5,7 +5,7 @@ $(function () {
     $('.orig_url').val(window.location.href);
 
     $.ajax({
-        url: "http://localhost:8081/getFamilyStatistics",
+        url: "https://kbb-server.labcode.tech/getFamilyStatistics",
         success: function (data) {
             for (let familieI in data.familien) {
                 const familie = data.familien[familieI];
@@ -26,7 +26,7 @@ $(function () {
         }
     })
     $.ajax({
-        url: "http://localhost:8081/getFamilien",
+        url: "https://kbb-server.labcode.tech/getFamilien",
         success: (data) => {
             for (let dataI in data) {
                 $('.select-familien').append('<option value="' + data[dataI] + '">' + data[dataI] + '</option>');

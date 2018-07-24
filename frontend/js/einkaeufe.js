@@ -1,6 +1,6 @@
 $(function () {
     $.ajax({
-        url: "http://localhost:8081/getEinkaeufe",
+        url: "https://kbb-server.labcode.tech/getEinkaeufe",
         success: (data) => {
             if (data.length === 0) {
                 $('#collapsible-einkaeufe').html('Bisher wurde nichts eingekauft!')
@@ -23,7 +23,7 @@ $(function () {
                                 '  <div class="collapsible-header">' + datum + ' bei ' + einkauf.ort + ' (<b>' + einkauf.betrag + ' &euro;</b>)</div>' +
                                 '  <div class="collapsible-body">' +
                                 '   Familie ' + einkauf.familienName + ' hat bei ' + einkauf.ort + ' f&uuml;r <b>' + einkauf.betrag + '€</b> eingekauft.' +
-                                '   <br><br><a href="http://localhost:8081/bonImages/' + einkauf.bon + '"><img src="http://localhost:8081/bonImages/' + einkauf.bon + '" width="50%" style="margin: auto; display: block;" /></a>' +
+                                '   <br><br><a href="https://kbb-server.labcode.tech/bonImages/' + einkauf.bon + '"><img src="https://kbb-server.labcode.tech/bonImages/' + einkauf.bon + '" width="50%" style="margin: auto; display: block;" /></a>' +
                                 '</div>' +
                                 '</li>')
                         }

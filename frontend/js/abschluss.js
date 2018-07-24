@@ -1,6 +1,6 @@
 $(function () {
     $.ajax({
-        url: "http://localhost:8081/getSettings",
+        url: "https://kbb-server.labcode.tech/getSettings",
         success: (data) => {
             if (data.abschlussBerechnet) {
                 $('#bereitsBerechnet').removeClass('hidden');
@@ -10,7 +10,7 @@ $(function () {
         }
     })
     $.ajax({
-        url: "http://localhost:8081/getFamilien",
+        url: "https://kbb-server.labcode.tech/getFamilien",
         success: (data) => {
             for (let dataI in data) {
                 $('#select-familien').append('<option value="' + data[dataI] + '">' + data[dataI] + '</option>');
@@ -25,11 +25,11 @@ $(function () {
         if (confirm("Möchstest du wirklich die Abschlussberechnung erstellen? Danach werden keine Eintragungen mehr möglich sein.")) {
             $.ajax({
                 method: 'post',
-                url: "http://localhost:8081/abschlussBerechnenDB",
+                url: "https://kbb-server.labcode.tech1/abschlussBerechnenDB",
                 success: (data) => {
                     $.ajax({
                         method: 'post',
-                        url: "http://localhost:8081/abschlussBerechnen",
+                        url: "https://kbb-server.labcode.tech/abschlussBerechnen",
                         success: (data) => {
                             $('#nochzuBerechnen').addClass('hidden');
                             $('#bereitsBerechnet').removeClass('hidden');
@@ -43,7 +43,7 @@ $(function () {
         const selectFamilie = $('#select-familien').val();
         // First Time
         $.ajax({
-            url: "http://localhost:8081/getFamilyDetails",
+            url: "https://kbb-server.labcode.tech/getFamilyDetails",
             data: {
                 name: selectFamilie
             },
