@@ -71,6 +71,14 @@ $(function () {
     $.ajax({
         url: "https://kbb-server.labcode.tech/getFamilyStatistics",
         success: function (data) {
+            data.familien.sort(function (a,b) {
+                console.log(a)
+                if (a.name < b.name)
+                    return -1;
+                if (a.name > b.name)
+                    return 1;
+                return 0;
+            })
             for (let familieI in data.familien) {
                 const familie = data.familien[familieI];
                 let farbeDiff = "";
@@ -82,6 +90,7 @@ $(function () {
                 $('#familientbody').append(
                     '<tr>' +
                     '   <td>' + familie.name + ' (' + familie.anzPersonen + ')</td>' +
+                    '   <td>' + familie.tage + '</td>' +
                     '   <td>' + familie.sollAusgaben + '</td>' +
                     '   <td>' + familie.istAusgaben + '</td>' +
                     '   <td style="background-color:' + farbeDiff + '"><span style="color: #fff;">' + (Math.round((familie.istAusgaben - familie.sollAusgaben) * 100) / 100).toString() + '</span></td>' +
@@ -92,6 +101,7 @@ $(function () {
     $.ajax({
         url: "https://kbb-server.labcode.tech/getFamilien",
         success: (data) => {
+            data = data.sort();
             for (let dataI in data) {
                 $('.select-familien').append('<option value="' + data[dataI] + '">' + data[dataI] + '</option>');
                 if (parseInt(dataI) + 1 === parseInt(data.length)) {

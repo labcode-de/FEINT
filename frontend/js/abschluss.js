@@ -12,6 +12,7 @@ $(function () {
     $.ajax({
         url: "https://kbb-server.labcode.tech/getFamilien",
         success: (data) => {
+            data = data.sort();
             for (let dataI in data) {
                 $('#select-familien').append('<option value="' + data[dataI] + '">' + data[dataI] + '</option>');
                 if (parseInt(data.length) === parseInt(dataI) + 1) {
