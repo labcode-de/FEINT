@@ -87,6 +87,8 @@ $(function () {
                 } else {
                     farbeDiff = '#2e7d32';
                 }
+                $('#summeSoll').html((Math.round(data.gesSoll * 100) / 100));
+                $('#summeIst').html((Math.round(data.gesAusgaben * 100) / 100));
                 $('#familientbody').append(
                     '<tr>' +
                     '   <td>' + familie.name + ' (' + familie.anzPersonen + ')</td>' +

@@ -155,6 +155,7 @@ MongoClient.connect(dbURL, function (err, mongoClient) {
                 let response = {familien: []};
                 let gesPersonenTage = 0;
                 let gesAusgaben = 0;
+                let gesSoll = 0;
                 for (let dbResI in dbRes) {
                     const familie = dbRes[dbResI];
                     gesPersonenTage += (familie.anzPersonen * familie.tage);
@@ -180,7 +181,9 @@ MongoClient.connect(dbURL, function (err, mongoClient) {
                                     sollAusgaben: sollAusgaben,
                                     istAusgaben: 0
                                 })
+                                gesSoll += sollAusgaben;
                                 if (parseInt(dbResII) + 1 === parseInt(dbRes.length)) {
+                                    response.gesSoll = gesSoll;
                                     res.send(response)
                                 }
                             } else {
@@ -196,7 +199,9 @@ MongoClient.connect(dbURL, function (err, mongoClient) {
                                             sollAusgaben: sollAusgaben,
                                             istAusgaben: istAusgaben
                                         })
+                                        gesSoll += sollAusgaben;
                                         if (parseInt(dbResII) + 1 === parseInt(dbRes.length)) {
+                                            response.gesSoll = gesSoll;
                                             res.send(response)
                                         }
                                     }
