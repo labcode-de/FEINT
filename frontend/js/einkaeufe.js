@@ -14,7 +14,6 @@ $(function () {
                     if (data.hasOwnProperty(dataI)) {
                         const einkauf = data[dataI];
                         const dateObj = new Date(einkauf.timestamp);
-                        console.log(dateObj.getDate())
                         const datum = dateObj.getDate().toString() + '.' + dateObj.getMonth().toString() + ".";
                         if(einkauf.bon === "") {
                             $('#collapsible-einkaeufe').append(
@@ -30,7 +29,7 @@ $(function () {
                                 //'   Familie ' + einkauf.familienName + ' hat bei ' + einkauf.ort + ' f&uuml;r <b>' + einkauf.betrag + '€</b> eingekauft.' +
                                 '   <a href="https://kbb-server.labcode.tech/bonImages/' + einkauf.bon + '"><img src="https://kbb-server.labcode.tech/bonImages/' + einkauf.bon + '" width="75%" style="margin: auto; display: block;" /></a>' +
                                 '</div>' +
-                                '</li>')
+                                '</li>');
                         }
                         if(parseInt(dataI) + 1 === data.length) {
                             $('.collapsible').collapsible();

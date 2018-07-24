@@ -26,7 +26,7 @@ $(function () {
         if (confirm("Möchstest du wirklich die Abschlussberechnung erstellen? Danach werden keine Eintragungen mehr möglich sein.")) {
             $.ajax({
                 method: 'post',
-                url: "https://kbb-server.labcode.tech1/abschlussBerechnenDB",
+                url: "https://kbb-server.labcode.tech/abschlussBerechnenDB",
                 success: (data) => {
                     $.ajax({
                         method: 'post',

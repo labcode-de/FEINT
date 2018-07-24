@@ -73,7 +73,6 @@ MongoClient.connect(dbURL, function (err, mongoClient) {
         if(mongoWriteable) {
             const rb = req.body;
             const betrag = parseFloat(rb.betrag.replace(",", "."));
-            console.log(req.file)
             if (rb.familienName !== undefined && rb.betrag !== undefined && rb.ort !== undefined) {
                 db.collection('familien').update({name: rb.familienName}, {
                     $push: {
@@ -331,7 +330,6 @@ MongoClient.connect(dbURL, function (err, mongoClient) {
                                     //familieIIdiff = 0;
                                     familien[familienII].difference = familien[familienII].difference - familieIIdiff;
                                     console.log("Fall A");
-                                    console.log(familieIDiff)
                                     db.collection('familien').update({name: familieI.name}, {
                                         $push: {
                                             transaktionen: {
