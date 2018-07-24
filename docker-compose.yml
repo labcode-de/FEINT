@@ -18,11 +18,11 @@ services:
       - db
     depends_on:
       - db
-  frontend:
-    image: nginx
-    volumes:
-      - ./frontend:/usr/share/nginx/html
-    ports:
-      - "0.0.0.0:40012:80"
-    depends_on:
-      - backend
+#  frontend:
+#    image: nginx
+#    volumes:
+#      - ./frontend:/usr/share/nginx/html
+#    ports:
+#      - "0.0.0.0:40012:80"
+#    depends_on:
+#      - backend
