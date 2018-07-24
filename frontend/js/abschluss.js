@@ -75,7 +75,7 @@ $(function () {
                         '            </table>')
                 }
                 for (let dataI in data.transaktionen) {
-                    $('#ergebnis-table').append("<tr><td>" + data.transaktionen[dataI].betrag + "</td><td>" + data.transaktionen[dataI].partner + "</td></tr>")
+                    $('#ergebnis-table').append("<tr><td>" + (Math.round(data.transaktionen[dataI].betrag * 100) / 100) + "</td><td>" + data.transaktionen[dataI].partner + "</td></tr>")
                 }
             }
         })
