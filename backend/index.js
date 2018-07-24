@@ -70,6 +70,11 @@ MongoClient.connect(dbURL, function (err, mongoClient) {
     });
 
     server.post('/addKassenbon', upload.single("kassenbon"), (req, res) => {
+        function parseDate(input) {
+            let parts = input.match(/(\d+)/g);
+            // note parts[1]-1
+            return new Date(parts[2], parts[1]-1, parts[0]);
+        }
         if(mongoWriteable) {
             const rb = req.body;
             const betrag = parseFloat(rb.betrag.replace(",", "."));
@@ -80,7 +85,7 @@ MongoClient.connect(dbURL, function (err, mongoClient) {
                             betrag: betrag,
                             ort: rb.ort,
                             bon: req.file.filename,
-                            timestamp: new Date(rb.date)
+                            timestamp: parseDate(rb.date)
                         }
                     }
                 }, (err) => {
@@ -92,7 +97,7 @@ MongoClient.connect(dbURL, function (err, mongoClient) {
                             betrag: betrag,
                             ort: rb.ort,
                             bon: req.file.filename,
-                            timestamp: new Date(rb.date)
+                            timestamp: parseDate(rb.date)
                         }, (err) => {
                             if (err) {
                                 res.status(500).send("db error " + err)
