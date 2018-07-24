@@ -15,7 +15,7 @@ $(function () {
                     if (data.hasOwnProperty(dataI)) {
                         const einkauf = data[dataI];
                         const dateObj = new Date(einkauf.timestamp);
-                        const datum = dateObj.getDate().toString() + '.' + dateObj.getMonth().toString() + ".";
+                        const datum = dateObj.getDate().toString() + '.' + ((parseInt(dateObj.getMonth())+ 1).toString()) + ".";
                         if (einkauf.bon === "") {
                             $('#collapsible-einkaeufe').append(
                                 '<li>' +
