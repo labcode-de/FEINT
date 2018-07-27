@@ -21,6 +21,7 @@ $(function () {
                 }
                 $('#summeSoll').html((Math.round(data.gesSoll * 100) / 100));
                 $('#summeIst').html((Math.round(data.gesAusgaben * 100) / 100));
+                $('#ausgabenPersonTag').html(data.gesPersonenTage);
                 $('#familientbody').append(
                     '<tr>' +
                     '   <td>' + familie.name + ' (' + familie.anzPersonen + ')</td>' +
