@@ -161,8 +161,10 @@ MongoClient.connect(dbURL, function (err, mongoClient) {
                 let gesPersonenTage = 0;
                 let gesAusgaben = 0;
                 let gesSoll = 0;
+                let gesPersonen = 0;
                 for (let dbResI in dbRes) {
                     const familie = dbRes[dbResI];
+                    gesPersonen += familie.anzPersonen;
                     gesPersonenTage += (familie.anzPersonen * familie.tage);
                     for (let familieEinkaeufeI in familie.einkaeufe) {
                         gesAusgaben += parseFloat(familie.einkaeufe[familieEinkaeufeI].betrag);
@@ -170,7 +172,7 @@ MongoClient.connect(dbURL, function (err, mongoClient) {
                     if (parseInt(dbResI) + 1 === parseInt(dbRes.length)) {
                         //res.send({ausgaben: gesAusgaben, personen: gesPersonen})
                         response.gesAusgaben = gesAusgaben;
-                        response.gesPersonen = gesPersonenTage;
+                        response.gesPersonen = gesPersonen;
                         for (let dbResII in dbRes) {
                             const familieII = dbRes[dbResII];
                             const familieIIPersonenTage = familieII.anzPersonen * familieII.tage;
