@@ -4,7 +4,6 @@ $(function () {
         url: "https://kbb-server.labcode.tech/getFamilyStatistics",
         success: function (data) {
             data.familien.sort(function (a,b) {
-                console.log(a)
                 if (a.name < b.name)
                     return -1;
                 if (a.name > b.name)
