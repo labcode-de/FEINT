@@ -178,6 +178,7 @@ MongoClient.connect(dbURL, function (err, mongoClient) {
                             const sollAusgaben = Math.round((gesAusgaben * anteil) * 100) / 100;
                             let istAusgaben = 0;
                             if (familieII.einkaeufe.length === 0) {
+                                response.gesPersonenTage = gesPersonenTage;
                                 response.familien.push({
                                     gesPersonenTage: gesPersonenTage,
                                     name: familieII.name,
@@ -197,8 +198,8 @@ MongoClient.connect(dbURL, function (err, mongoClient) {
                                     istAusgaben += familieII.einkaeufe[familieEinkaeufeII].betrag;
                                     if (parseInt(familieEinkaeufeII) + 1 === parseInt(familieII.einkaeufe.length)) {
                                         istAusgaben = (Math.round(istAusgaben * 100) / 100);
-                                        response.familien.push({
-                                            gesPersonenTage: gesPersonenTage,
+                                        response.gesPersonenTage = gesPersonenTage;
+                                            response.familien.push({
                                             name: familieII.name,
                                             anzPersonen: familieII.anzPersonen,
                                             tage: familieII.tage,
