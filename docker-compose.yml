@@ -15,16 +15,17 @@ services:
     # only for development
       - ./backend/:/app
     ports:
-      - "0.0.0.0:40011:4000"
+      - "0.0.0.0:40022:4000"
     links:
       - db
     depends_on:
       - db
-#  frontend:
-#    image: nginx
-#    volumes:
-#      - ./frontend:/usr/share/nginx/html
-#    ports:
-#      - "0.0.0.0:40013:80"
-#    depends_on:
-#      - backend
+  frontend:
+    image: node:10
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "0.0.0.0:40021:4200"
+    command: bash -c "cd /app && npm install && node node_modules/.bin/ng serve --host 0.0.0.0"
+    depends_on:
+      - backend

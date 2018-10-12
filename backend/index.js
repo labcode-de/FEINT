@@ -42,7 +42,7 @@ server.use(bodyParser.json());
 server.use(cors());
 server.use(express.static('public'));
 let mongoWriteable = true;
-MongoClient.connect(dbURL, function (err, mongoClient) {
+MongoClient.connect(dbURL, (err, mongoClient) => {
     if (err) throw err;
     const db = mongoClient.db(dbName);
 

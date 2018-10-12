@@ -54,3 +54,5 @@ typings/
 .idea/
 bonImages/
 db/
+frontend-old
+credentials.json

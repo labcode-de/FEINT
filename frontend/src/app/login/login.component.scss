@@ -1,0 +1,24 @@
+.outer {
+  position: absolute;
+
+}
+#wrapper-login {
+  display: table-cell;
+  width: 100vw;
+  height: 100vh;
+  vertical-align: middle;
+}
+.background {
+  width: 100vw;
+  height: 100vh;
+  background: url("/assets/images/login-background/sea-418742.jpg") center center;
+  top: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.g-signin2 {
+  div {
+    margin: auto;
+  }
+}
