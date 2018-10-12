@@ -7,21 +7,13 @@ import {NavigationEnd, Router} from "@angular/router";
   styleUrls: ['./navigation-bar.component.scss']
 })
 export class NavigationBarComponent implements OnInit {
-  hideElement: boolean = false;
-
+  loggedIn = false;
   constructor(private router: Router) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        if (event.url === '/login') {
-          this.hideElement = true;
-        }  else {
-          this.hideElement = false;
-        }
-      }
-    });
+    // this.hideElement = !router.urlTree.contains(router.createUrlTree(['/login']))
   }
 
   ngOnInit() {
+    this.loggedIn = false;
   }
 
 }
