@@ -9,7 +9,7 @@ const dbName = "labcodeKBB";
 const passport  = require('passport');
 const auth_config = require('./auth/auth-config');
 const {initAuthentication} = require('./auth/initAuthentication');
-const session = require('express-session');
+const session = require('express-session')
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(bodyParser.json());
 server.use(cors());
@@ -18,15 +18,16 @@ server.use(session({
     resave: false,
     saveUninitialized: false
 }));
-initAuthentication(passport);
-server.use(passport.initialize());
-server.use(passport.session());
 
 server.use(express.static('public'));
 
 MongoClient.connect(dbURL, (err, mongoClient) => {
     if (err) throw err;
     const db = mongoClient.db(dbName);
+
+    initAuthentication(passport, db);
+    server.use(passport.initialize());
+    server.use(passport.session());
 
     server.get('', (req, res) => {
         res.send('Hey there Alpakas!');

@@ -1,6 +1,6 @@
 const {googleStrategy} = require("./googleStategy");
 
-const initAuthentication = (passport) => {
+const initAuthentication = (passport, db) => {
     passport.serializeUser(function(user, done) {
         // done(null, user.id);
         done(null, user);
@@ -10,6 +10,6 @@ const initAuthentication = (passport) => {
         // Users.findById(obj, done);
         done(null, obj);
     });
-    googleStrategy(passport);
+    googleStrategy(passport, db);
 };
 module.exports.initAuthentication = initAuthentication;
