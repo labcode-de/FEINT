@@ -8,7 +8,7 @@ const googleStrategy = (passport, db) => {
             callbackURL: config.google.callbackURI
         },
         function (accessToken, refreshToken, profile, done) {
-            db.collection('users').findOne({'email': profile.getEmail()},
+            db.collection('users').findOne({'email': profile.email},
                 function (err, user) {
                     if (err) {
                         return done(err);
