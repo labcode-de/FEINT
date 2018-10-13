@@ -1,7 +1,7 @@
 const PP_Google_Strategy = require("passport-google-oauth").OAuth2Strategy;
 const config =  require('./auth-config');
 
-export const googleStrategy = (passport) => {
+const googleStrategy = (passport) => {
     passport.use(new PP_Google_Strategy({
             clientID: config.google.clientID,
             clientSecret: config.google.clientSecret,
@@ -13,4 +13,5 @@ export const googleStrategy = (passport) => {
             });
         }
     ));
-}
+};
+module.exports.googleStrategy = googleStrategy;

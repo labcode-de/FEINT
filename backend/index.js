@@ -1,5 +1,3 @@
-import {initAuthentication} from "./auth/initAuthentication";
-
 const express = require('express');
 const server = express();
 const bodyParser = require('body-parser');
@@ -10,18 +8,19 @@ const dbURL = "mongodb://db:27017";
 const dbName = "labcodeKBB";
 const passport  = require('passport');
 const auth_config = require('./auth/auth-config');
-
+const {initAuthentication} = require('./auth/initAuthentication');
+const session = require('express-session');
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(bodyParser.json());
 server.use(cors());
-app.use(session({
+server.use(session({
     secret: auth_config.session.secret,
     resave: false,
     saveUninitialized: false
 }));
 initAuthentication(passport);
-app.use(passport.initialize());
-app.use(passport.session());
+server.use(passport.initialize());
+server.use(passport.session());
 
 server.use(express.static('public'));
 

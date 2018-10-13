@@ -1,6 +1,6 @@
-import {googleStrategy} from "./googleStategy";
+const {googleStrategy} = require("./googleStategy");
 
-export const initAuthentication = (passport) => {
+const initAuthentication = (passport) => {
     passport.serializeUser(function(user, done) {
         // done(null, user.id);
         done(null, user);
@@ -11,4 +11,5 @@ export const initAuthentication = (passport) => {
         done(null, obj);
     });
     googleStrategy(passport);
-}
+};
+module.exports.initAuthentication = initAuthentication;
