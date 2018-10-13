@@ -56,3 +56,4 @@ bonImages/
 db/
 frontend-old
 credentials.json
+auth-config.json

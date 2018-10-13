@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     function onSuccess(googleUser) {
+      console.log('bla')
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
     }
     function onFailure(error) {
