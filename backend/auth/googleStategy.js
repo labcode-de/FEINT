@@ -16,8 +16,7 @@ const googleStrategy = (passport, db) => {
                     if (!user) {
                         db.collection('users').insert({
                             email: profile.emails[0].value,
-                            name: profile.name,
-                            picture: profile.image.url
+                            name: profile.name
                         }, (err) => {
                             if(err) return done(err);
                         })
