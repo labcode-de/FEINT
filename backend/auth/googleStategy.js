@@ -8,15 +8,19 @@ const googleStrategy = (passport, db) => {
             callbackURL: config.google.callbackURI
         },
         function (accessToken, refreshToken, profile, done) {
-            db.collection('users').findOne({'email': profile.emails[0].value},
+            db.collection('users').findOne({'service_id': profile.id, authenticatedServices: "google"},
                 function (err, user) {
                     if (err) {
                         return done(err);
                     }
                     if (!user) {
                         db.collection('users').insert({
+                            service_id: profile.id,
+                            authenticatedServices: "google",
                             email: profile.emails[0].value,
-                            name: profile.name
+                            firstName: profile.name.givenName,
+                            familyName: profile.name.familyName,
+                            allowedEvents: []
                         }, (err) => {
                             if(err) return done(err);
                         })
