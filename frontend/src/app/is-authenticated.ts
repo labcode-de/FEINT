@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
 @Injectable()
 export class IsAuthenticated implements CanActivate {
   constructor(private userService: UserService, private router: Router) {}
-  private isAuthenticated(): boolean {
+  private userServiceAuthenticated(): boolean {
     if(this.userService.isAuthenticated) {
       return true;
     } else {
@@ -16,10 +16,14 @@ export class IsAuthenticated implements CanActivate {
   }
   private getUser (): Promise<boolean> {
     return this.userService.getUser().then(() => {
-     return this.isAuthenticated();
+     return this.userServiceAuthenticated();
     }).catch(() => {
-      return this.isAuthenticated()
+      return this.userServiceAuthenticated()
     })
+  }
+
+  isAuthenticated():Promise<boolean> {
+    return this.getUser();
   }
 
   canActivate(

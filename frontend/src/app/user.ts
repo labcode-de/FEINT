@@ -9,11 +9,12 @@ export class User {
 
 
   constructor(data) {
-    this.id = data._id;
-    this.firstName = data.firstName;
-    this.familyName = data.familyName;
-    this.email = data.email;
-    this.authenticatedService = data.authenticatedServices;
-    this.allowedEvents = data.allowedEvents;
+    this.id = data.data._id;
+    this.firstName = data.data.firstName;
+    this.familyName = data.data.familyName;
+    this.email = data.data.email;
+    this.authenticatedService = data.data.authenticatedServices;
+    this.allowedEvents = data.data.allowedEvents;
+    this.service_id = data.data.service_id;
   }
 }

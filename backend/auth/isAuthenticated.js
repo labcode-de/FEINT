@@ -18,7 +18,6 @@ const isAuthenticated = (req, res, next) => {
             });
         } catch (err) {
             error = true;
-            console.log('ERROR when parsing access token.', err);
         }
     }
     if(error) {
