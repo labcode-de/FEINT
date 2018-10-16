@@ -20,7 +20,7 @@ const googleCallback = (req, res, next) => {
             auth_config.jwt_token.secret,
             {expiresIn: auth_config.jwt_token.expiresIn});
 
-        res.cookie(auth_config.jwt_token.cookie_name, token);
+        res.cookie(auth_config.jwt_token.cookie_name, token,  { expires: new Date(Date.now() + 2628000000)});
         res.redirect('http://localhost:40021');
 
     })(req, res, next);

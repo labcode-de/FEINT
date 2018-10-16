@@ -1,0 +1,91 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "FEINT"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "feint-server.labcode.de"
+schemes:
+- "https"
+paths:
+  /user/loginGoogle:
+    post:
+      tags:
+      - "user"
+      summary: "Login with Google Profile"
+      operationId: "loginGoogle"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "body"
+        description: "Token ID issued by Google"
+        required: true
+        type: "string"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful, responds with cookie"
+        401:
+          description: "Token wrong, unsuccessful operation"
+  /user/getProfile:
+    get:
+      tags:
+      - "user"
+      summary: "Get the current authenticated User"
+      description: ""
+      operationId: "getUserProfile"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        401:
+          description: "Unauthorized"
+      security:
+      - petstore_auth:
+        - "read:pets"
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  User:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+        description: "MongoDB ID"
+      authenticatedServices:
+        type: 'string'
+      googleID:
+        type: "string"
+      email:
+        type: "string"
+      name:
+        type: "object"
+        properties:
+          familyName:
+            type: "string"
+          givenName:
+            type: "string"
+      allowedEvents:
+        type: "array"
+        items:
+          type: "string"
+          description: "MongoDB-IDs of Events"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
