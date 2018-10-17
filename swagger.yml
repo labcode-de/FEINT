@@ -9,27 +9,6 @@ host: "feint-server.labcode.de"
 schemes:
 - "https"
 paths:
-  /user/loginGoogle:
-    post:
-      tags:
-      - "user"
-      summary: "Login with Google Profile"
-      operationId: "loginGoogle"
-      consumes:
-      - "application/json"
-      parameters:
-      - in: "query"
-        name: "body"
-        description: "Token ID issued by Google"
-        required: true
-        type: "string"
-      produces:
-      - "application/json"
-      responses:
-        200:
-          description: "successful, responds with cookie"
-        401:
-          description: "Token wrong, unsuccessful operation"
   /user/getProfile:
     get:
       tags:
@@ -47,21 +26,46 @@ paths:
         401:
           description: "Unauthorized"
       security:
-      - petstore_auth:
-        - "read:pets"
+      - token: []
+  /control/changeProfile:
+    post:
+      tags:
+      - "control"
+      summary: "Change the current authenticated User"
+      description: ""
+      parameters:
+      - in: body
+        name: body
+        description: ""
+        schema:
+          $ref: '#/definitions/UserChange'
+      operationId: "changeUserProfile"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        500:
+          description: "DB Error"
+      security:
+      - token: []
 securityDefinitions:
-  petstore_auth:
-    type: "oauth2"
-    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
-    flow: "implicit"
-    scopes:
-      write:pets: "modify pets in your account"
-      read:pets: "read your pets"
-  api_key:
+  token:
     type: "apiKey"
-    name: "api_key"
+    name: "x-access-token"
     in: "header"
 definitions:
+  UserChange:
+    type: "object"
+    properties:
+      firstName:
+        type: "string"
+      familyName:
+        type: "string"
   User:
     type: "object"
     properties:

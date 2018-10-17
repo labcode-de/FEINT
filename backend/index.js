@@ -31,9 +31,7 @@ MongoClient.connect(dbURL, (err, mongoClient) => {
 
     server.get("/user/google", passport.authenticate('google', {scope: ['openid email profile']}))
     server.get('/user/google/callback', authController.googleCallback);
-    server.get('/user/getProfile', isAuthenticated, (req, res) => {
-        res.send(req.inspector.user); // DEINFED IN isAuthenticated
-    });
+    server.get('/user/getProfile', isAuthenticated, authController.getProfile);
 
     server.post('/control/changeProfile', isAuthenticated, controlController.changeProfile);
 

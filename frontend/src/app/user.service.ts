@@ -25,6 +25,7 @@ export class UserService {
         axios.get(environment.apiServer + "/user/getProfile", {headers: {'x-access-token': UserService.getCookie("lbcd_session")}}).then((httpResponse) => {
           this.isAuthenticated = true;
           this.user = new User(httpResponse);
+          this.loaded = true;
           resolve(this.user);
         }).catch((httpError) => {
           this.isAuthenticated = false;
