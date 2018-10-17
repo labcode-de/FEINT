@@ -22,15 +22,20 @@ export class UserService {
   public getUser() {
     return new Promise((resolve, reject) => {
       if (!this.loaded) {
-        axios.get(environment.apiServer + "/user/getProfile", {headers: {'x-access-token': UserService.getCookie("lbcd_session")}}).then((httpResponse) => {
-          this.isAuthenticated = true;
-          this.user = new User(httpResponse);
-          this.loaded = true;
-          resolve(this.user);
-        }).catch((httpError) => {
+        if(UserService.getCookie("lbcd_session")) {
+          axios.get(environment.apiServer + "/user/getProfile", {headers: {'x-access-token': UserService.getCookie("lbcd_session")}}).then((httpResponse) => {
+            this.isAuthenticated = true;
+            this.user = new User(httpResponse);
+            this.loaded = true;
+            resolve(this.user);
+          }).catch((httpError) => {
+            this.isAuthenticated = false;
+            reject(httpError)
+          })
+        } else {
           this.isAuthenticated = false;
-          reject(httpError)
-        })
+          reject("error")
+        }
       } else {
         if (this.isAuthenticated) {
           resolve(this.user);
