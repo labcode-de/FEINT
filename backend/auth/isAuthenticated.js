@@ -4,6 +4,7 @@ const ObjectID = require("mongodb").ObjectID;
 const db = require('../index').db;
 const isAuthenticated = (req, res, next) => {
     const token = req.headers['x-access-token'];
+    console.log(token);
     let error = false;
     if (token) {
         try {
@@ -19,6 +20,8 @@ const isAuthenticated = (req, res, next) => {
         } catch (err) {
             error = true;
         }
+    } else {
+        return res.status(401).json({error: 'Invalid access token!'});
     }
     if(error) {
         return res.status(401).json({error: 'Invalid access token!'});

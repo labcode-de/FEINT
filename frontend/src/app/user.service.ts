@@ -21,8 +21,8 @@ export class UserService {
 
   public getUser() {
     return new Promise((resolve, reject) => {
-      if(!this.loaded) {
-        axios.get(environment.apiServer + "/user/getProfile", {  headers: {'x-access-token': UserService.getCookie("lbcd_session")}}).then((httpResponse) => {
+      if (!this.loaded) {
+        axios.get(environment.apiServer + "/user/getProfile", {headers: {'x-access-token': UserService.getCookie("lbcd_session")}}).then((httpResponse) => {
           this.isAuthenticated = true;
           this.user = new User(httpResponse);
           resolve(this.user);
@@ -31,12 +31,23 @@ export class UserService {
           reject(httpError)
         })
       } else {
-        if(this.isAuthenticated) {
+        if (this.isAuthenticated) {
           resolve(this.user);
         } else {
           reject('error')
         }
       }
+    })
+  }
+
+  public changeUserProfile(firstName: String, familyName: String) {
+    axios.post(environment.apiServer + "/control/changeProfile", {
+      firstName: firstName,
+      familyName: familyName
+    }, {headers: {'x-access-token': UserService.getCookie("lbcd_session")}}).then(() => {
+      //OK
+    }).catch((err) => {
+      console.log('Change UserProfile Error: ' + err)
     })
   }
 }

@@ -1,0 +1,25 @@
+<div>
+  <div class="center">
+    <h1 class="headline">Verwaltung</h1>
+  </div>
+  <div class="container">
+    <form>
+    <h4>Deine Daten</h4>
+    <div class="row">
+        <div class="input-field col s12 m6"><input type="text" id="control-firstName" name="control-firstName" [(ngModel)]="firstName" class="validate"><label
+          for="control-firstName">Vorname</label></div>
+        <div class="input-field col s12 m6"><input type="text" id="control-familyName" name="abc-familyName" [(ngModel)]="familyName" class="validate"><label
+          for="control-familyName">Nachname (wird angezeigt)</label></div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12"><input type="email" id="control-email" class="validate" disabled><label
+        for="control-email">E-Mail</label></div>
+    </div>
+    <div class="center">
+      <a class="btn-large waves-effect submit" (click)="submit()" name="action">Submit
+        <i class="material-icons right">send</i>
+      </a>
+    </div>
+    </form>
+  </div>
+</div>

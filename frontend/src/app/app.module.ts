@@ -6,23 +6,25 @@ import { LoginComponent } from './login/login.component';
 import {RouterModule} from "@angular/router";
 import {routes} from "./routes";
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
-import {FormsModule} from "@angular/forms";
+import {Form, FormsModule} from "@angular/forms";
 import {UserService} from "./user.service";
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {IsAuthenticated} from "./is-authenticated";
 import { HomeComponent } from './home/home.component';
+import { ControlComponent } from './control/control.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavigationBarComponent,
-    HomeComponent
+    HomeComponent,
+    ControlComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes)
   ],
   providers: [UserService, IsAuthenticated],
   bootstrap: [AppComponent],

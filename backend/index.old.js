@@ -52,7 +52,7 @@ MongoClient.connect(dbURL, (err, mongoClient) => {
         res.send('Hey there Alpakas!');
     });
 
-    server.post('/verwaltung', (req, res) => {
+    server.post('/control', (req, res) => {
         const rb = req.body;
         if (rb.familien !== undefined) {
             db.collection('settings').insert({"abschlussBerechnet" : false});
