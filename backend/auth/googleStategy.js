@@ -21,10 +21,15 @@ const googleStrategy = (passport, db) => {
                             firstName: profile.name.givenName,
                             familyName: profile.name.familyName,
                             allowedEvents: []
-                        }, (err) => {
-                            if(err) return done(err);
+                        }, (err, dbInsertRes) => {
+                            if(err) {
+                                return done(err);
+                            } else {
+                                return done(null, dbInsertRes)
+                            }
                         })
                     }
+                    console.log(user);
                     return done(null, user);
                 }
             );

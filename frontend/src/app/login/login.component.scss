@@ -2,12 +2,14 @@
   position: absolute;
 
 }
+
 #wrapper-login {
   display: table-cell;
   width: 100vw;
   height: 100vh;
   vertical-align: middle;
 }
+
 .background {
   width: 100vw;
   height: 100vh;
@@ -21,4 +23,12 @@
   width: 192px;
   margin: auto;
   display: block;
+}
+
+.footer {
+  position: absolute;
+  color: #ffffff;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
 }
