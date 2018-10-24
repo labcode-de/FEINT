@@ -8,7 +8,6 @@ const dbURL = "mongodb://db:27017";
 const dbName = "labcodeFEINT";
 const passport = require('passport');
 const {initAuthentication} = require('./auth/initAuthentication');
-const authController = require('./controller/auth');
 
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(bodyParser.json());
@@ -24,6 +23,7 @@ MongoClient.connect(dbURL, (err, mongoClient) => {
     initAuthentication(passport, db);
     const isAuthenticated = require("./auth/isAuthenticated").isAuthenticated;  //// REQUIRE MIDDLEWARE AFTER DB EXPORT
     const controlController = require('./controller/control');
+    const authController = require('./controller/auth');
     server.use(passport.initialize());
     server.get('', (req, res) => {
         res.send('Hey there Alpacas!');
