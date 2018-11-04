@@ -5,7 +5,7 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "feint-server.labcode.de"
+# host: "feint-server.labcode.de"
 schemes:
 - "https"
 paths:
@@ -35,6 +35,7 @@ paths:
       description: ""
       parameters:
       - in: body
+        required: true
         name: body
         description: ""
         schema:
@@ -51,6 +52,28 @@ paths:
           description: "Unauthorized"
         500:
           description: "DB Error"
+      security:
+      - token: []
+  /event/{eventId}/getFamilyStats:
+    get:
+      tags:
+      - "event"
+      summary: "get family stats of Event"
+      description: ""
+      parameters:
+      - in: "path"
+        name: "eventId"
+        type: string
+        required: true
+        description: eventIdentifier of the event to get
+      operationId: 'getEventFamilyStats'
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/FamilyStats"
       security:
       - token: []
 securityDefinitions:
@@ -88,8 +111,44 @@ definitions:
       allowedEvents:
         type: "array"
         items:
-          type: "string"
-          description: "MongoDB-IDs of Events"
-externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+          type: "object"
+          description: "Events"
+          properties:
+            eventId:
+              type: "string"
+            name:
+              type: "string"
+            identifier:
+              type: "string"
+  FamilyStats:
+    type: "object"
+    properties:
+      families:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            name:
+              type: "string"
+              description: "FamilyName"
+            numPeople:
+              type: "number"
+            numDays:
+              type: "number"
+            peopleDays:
+              type: "number"
+            share:
+              type: "number"
+              description: "Anteil am Geld"
+            currentAmount:
+              type: "number"
+              description: "Current Amount of family"
+            debit:
+              type: "number"
+              description: "Soll"
+      totalAmount:
+        type: "number"
+      totalDebit:
+        type: "number"
+      totalPeopleDays:
+        type: "number"

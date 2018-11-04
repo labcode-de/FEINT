@@ -22,8 +22,10 @@ MongoClient.connect(dbURL, (err, mongoClient) => {
 
     initAuthentication(passport, db);
     const isAuthenticated = require("./auth/isAuthenticated").isAuthenticated;  //// REQUIRE MIDDLEWARE AFTER DB EXPORT
+    const isAuthenticatedAndAuthorizedEvent = require("./auth/isAuthenticated").isAuthenticatedAndAuthorizedEvent;  //// REQUIRE MIDDLEWARE AFTER DB EXPORT
     const controlController = require('./controller/control');
     const authController = require('./controller/auth');
+    const eventController = require('./controller/event');
     server.use(passport.initialize());
     server.get('', (req, res) => {
         res.send('Hey there Alpacas!');
@@ -35,6 +37,7 @@ MongoClient.connect(dbURL, (err, mongoClient) => {
 
     server.post('/control/changeProfile', isAuthenticated, controlController.changeProfile);
 
+    server.get('/event/:eventId/getFamilyStats', isAuthenticatedAndAuthorizedEvent, eventController.getFamilyStats)
 
         server.listen(4000, () => {
         console.log('LabCode FEINT backend is listening on 4000');
