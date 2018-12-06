@@ -57,7 +57,7 @@ paths:
   /event/{eventId}/getFamilyStats:
     get:
       tags:
-      - "event"
+      - "eventFamilyStats"
       summary: "get family stats of Event"
       description: ""
       parameters:
@@ -65,7 +65,7 @@ paths:
         name: "eventId"
         type: string
         required: true
-        description: eventIdentifier of the event to get
+        description: eventIdentifier of the eventFamilyStats to get
       operationId: 'getEventFamilyStats'
       produces:
       - "application/json"

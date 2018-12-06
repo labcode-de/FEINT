@@ -70,13 +70,13 @@ const isAuthenticatedAndAuthorizedEvent = (req, res, next) => {
                             if (allowedEventIdentifier.includes(eventId)) {
                                 return next();
                             } else {
-                                res.status(401).json({error: 'Not a allowed event for access token or no event is available with this identifier!'});
+                                res.status(401).json({error: 'Not a allowed eventFamilyStats for access token or no eventFamilyStats is available with this identifier!'});
                             }
                         } else {
-                            res.status(401).json({error: 'Not a allowed event for access token or no event is available with this identifier!'});
+                            res.status(401).json({error: 'Not a allowed eventFamilyStats for access token or no eventFamilyStats is available with this identifier!'});
                         }
                     } else {
-                        res.status(401).json({error: 'Not a allowed event for access token or no event is available with this identifier!'});
+                        res.status(401).json({error: 'Not a allowed eventFamilyStats for access token or no eventFamilyStats is available with this identifier!'});
                     }
                 });
 

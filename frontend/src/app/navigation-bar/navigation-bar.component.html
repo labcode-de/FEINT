@@ -4,8 +4,8 @@
       <a routerLink="/" class="brand-logo left">FEINT</a>
       <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="control">Verwaltung</a></li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a></li>
+        <li routerLinkActive="active"><a routerLink="/control">Verwaltung</a></li>
       </ul>
     </div>
   </nav>

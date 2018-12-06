@@ -37,7 +37,7 @@ MongoClient.connect(dbURL, (err, mongoClient) => {
 
     server.post('/control/changeProfile', isAuthenticated, controlController.changeProfile);
 
-    server.get('/event/:eventId/getFamilyStats', isAuthenticatedAndAuthorizedEvent, eventController.getFamilyStats)
+    server.get('/eventFamilyStats/:eventId/getFamilyStats', isAuthenticatedAndAuthorizedEvent, eventController.getFamilyStats)
 
         server.listen(4000, () => {
         console.log('LabCode FEINT backend is listening on 4000');

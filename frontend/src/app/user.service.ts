@@ -13,7 +13,7 @@ export class UserService {
   private loaded: boolean = false;
   constructor() { }
 
-  private static getCookie(name) {
+  private getCookie(name) {
     const regex = new RegExp(name + "=([^;]+)");
     const value = regex.exec(document.cookie);
     return (value != null) ? unescape(value[1]) : null;
@@ -22,8 +22,8 @@ export class UserService {
   public getUser() {
     return new Promise((resolve, reject) => {
       if (!this.loaded) {
-        if(UserService.getCookie("lbcd_session")) {
-          axios.get(environment.apiServer + "/user/getProfile", {headers: {'x-access-token': UserService.getCookie("lbcd_session")}}).then((httpResponse) => {
+        if(this.getCookie("lbcd_session")) {
+          axios.get(environment.apiServer + "/user/getProfile", {headers: {'x-access-token': this.getCookie("lbcd_session")}}).then((httpResponse) => {
             this.isAuthenticated = true;
             this.user = new User(httpResponse);
             this.loaded = true;
@@ -50,7 +50,7 @@ export class UserService {
     axios.post(environment.apiServer + "/control/changeProfile", {
       firstName: firstName,
       familyName: familyName
-    }, {headers: {'x-access-token': UserService.getCookie("lbcd_session")}}).then(() => {
+    }, {headers: {'x-access-token': this.getCookie("lbcd_session")}}).then(() => {
       //OK
     }).catch((err) => {
       console.log('Change UserProfile Error: ' + err)

@@ -12,6 +12,8 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {IsAuthenticated} from "./is-authenticated";
 import { HomeComponent } from './home/home.component';
 import { ControlComponent } from './control/control.component';
+import { EventComponent } from './event/event.component';
+import {EventService} from "./event.service";
 
 @NgModule({
   declarations: [
@@ -19,14 +21,15 @@ import { ControlComponent } from './control/control.component';
     LoginComponent,
     NavigationBarComponent,
     HomeComponent,
-    ControlComponent
+    ControlComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [UserService, IsAuthenticated],
+  providers: [UserService, EventService, IsAuthenticated],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -1,0 +1,23 @@
+<div *ngIf="dataLoaded | async">
+  <h1 class="center thin">{{eventFamilyStats.name}} - Konten</h1>
+  <table class="centered highlight responsive-table">
+    <thead>
+    <tr>
+      <th>Familie</th>
+      <th>Tage</th>
+      <th>Soll</th>
+      <th>Ist</th>
+      <th>Differenz</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let family of eventFamilyStats.families">
+        <td>{{ family.name }} ({{family.numPeople}} P.)</td>
+        <td>{{ family.numDays }}</td>
+        <td>{{ family.debit }} &euro;</td>
+        <td>{{ family.currentAmount }} &euro;</td>
+        <td [ngClass]="{'table-diff-plus': family.currentAmount - family.debit > 0, 'table-diff-minus': family.currentAmount - family.debit < 0}">{{ family.currentAmount - family.debit }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

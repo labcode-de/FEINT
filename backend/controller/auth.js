@@ -45,9 +45,15 @@ const getProfile = (req, res) => {
         let user = Object.assign({}, req.inspector.user);
         dbRes.forEach((event) => {
             if(allowedEventIDsString.includes(event._id.toString())) {
+                let amount = 0;
+                for (let purchaseI in event.purcharses) {
+                    const purchase = event.purcharses[purchaseI];
+                    amount += purchase.amount;
+                }
                 let allowedEvent = user.allowedEvents[allowedEventIDsString.indexOf(event._id.toString())];
                 allowedEvent.name = event.name;
                 allowedEvent.identifier = event.identifier;
+                allowedEvent.amount = amount;
             }
         });
         res.send(user); // DEINFED IN isAuthenticated
