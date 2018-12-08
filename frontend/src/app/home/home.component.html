@@ -3,15 +3,23 @@
     <h1 class="headline">Hi {{user.firstName}}</h1>
   </div>
   <div class="container row">
-      <div class="col s12 m6 l4" *ngFor="let allowedEvent of user.allowedEvents; let allowedEventI = index" [routerLink]="['event', allowedEvent.identifier]" [ngClass]="{'offset-l2': user.allowedEvents.length == 2 && allowedEventI == 0, 'offset-l4': user.allowedEvents.length == 1}">
-        <div style="width: 100%; height: 200px; padding: 5px">
-          <div style="height:100%" class="blue darken-4 event">
-            <h3 class="center">{{allowedEvent.name}}</h3>
-            <h5 class="center">{{allowedEvent.people}} P /// {{allowedEvent.days}} T</h5>
-            <h5 class="center">{{allowedEvent.amount}} &euro;</h5>
-          </div>
+    <div class="col s12 m6 l4" *ngFor="let allowedEvent of user.allowedEvents"
+         [routerLink]="['event', allowedEvent.identifier]">
+      <div style="width: 100%; height: 200px; padding: 5px">
+        <div style="height:100%" class="blue darken-4 event">
+          <h3 class="center">{{allowedEvent.name}}</h3>
+          <h5 class="center">{{allowedEvent.people}} P /// {{allowedEvent.days}} T</h5>
+          <h5 class="center">{{allowedEvent.amount}} &euro;</h5>
         </div>
       </div>
+    </div>
+    <div class="col s12 m6 l4" routerLink="/addEvent">
+      <div style="width: 100%; height: 200px; padding: 5px">
+        <div style="height:100%" class="grey event event-add">
+          <h3 class="center">+</h3>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="footer">
     <p>built with &hearts; by LabCode</p>

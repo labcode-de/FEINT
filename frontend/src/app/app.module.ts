@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { ControlComponent } from './control/control.component';
 import { EventComponent } from './event/event.component';
 import {EventService} from "./event.service";
+import { AddEventComponent } from './add-event/add-event.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {EventService} from "./event.service";
     NavigationBarComponent,
     HomeComponent,
     ControlComponent,
-    EventComponent
+    EventComponent,
+    AddEventComponent
   ],
   imports: [
     BrowserModule,

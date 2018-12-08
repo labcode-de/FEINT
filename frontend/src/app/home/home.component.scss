@@ -15,4 +15,14 @@ h1.headline {
     margin: 0;
     padding: 15px 0 0;
   }
+  &.event-add {
+    display: table;
+    width: 100%;
+    h3 {
+      font-size: 5rem;
+      display: table-cell;
+      vertical-align: middle;
+      padding: 0;
+    }
+  }
 }

@@ -4,6 +4,7 @@ import {IsAuthenticated} from "./is-authenticated";
 import {HomeComponent} from "./home/home.component";
 import {ControlComponent} from "./control/control.component";
 import {EventComponent} from "./event/event.component";
+import {AddEventComponent} from "./add-event/add-event.component";
 
 export const routes: Routes = [
   {
@@ -23,6 +24,11 @@ export const routes: Routes = [
   {
     path: 'event/:id',
     component: EventComponent,
+    canActivate: [IsAuthenticated]
+  },
+  {
+    path: 'addEvent',
+    component: AddEventComponent,
     canActivate: [IsAuthenticated]
   }
 ];

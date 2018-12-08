@@ -7,17 +7,17 @@ info:
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 # host: "feint-server.labcode.de"
 schemes:
-- "https"
+  - "https"
 paths:
   /user/getProfile:
     get:
       tags:
-      - "user"
+        - "user"
       summary: "Get the current authenticated User"
       description: ""
       operationId: "getUserProfile"
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         200:
           description: "successful operation"
@@ -26,23 +26,23 @@ paths:
         401:
           description: "Unauthorized"
       security:
-      - token: []
+        - token: []
   /control/changeProfile:
     post:
       tags:
-      - "control"
+        - "control"
       summary: "Change the current authenticated User"
       description: ""
       parameters:
-      - in: body
-        required: true
-        name: body
-        description: ""
-        schema:
-          $ref: '#/definitions/UserChange'
+        - in: body
+          required: true
+          name: body
+          description: ""
+          schema:
+            $ref: '#/definitions/UserChange'
       operationId: "changeUserProfile"
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         200:
           description: "OK"
@@ -53,35 +53,67 @@ paths:
         500:
           description: "DB Error"
       security:
-      - token: []
+        - token: []
+  /event/addEvent:
+    post:
+      tags:
+        - "event"
+      summary: "add event"
+      description: ""
+      parameters:
+        - in: body
+          required: true
+          name: body
+          description: ""
+          schema:
+            $ref: "#/definitions/AddEvent"
+      operationId: 'addEvent'
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Identifier used"
+        401:
+          description: "Unauthorized"
+      security:
+        - token: []
   /event/{eventId}/getFamilyStats:
     get:
       tags:
-      - "eventFamilyStats"
-      summary: "get family stats of Event"
+        - "event"
+      summary: "get family stats of event"
       description: ""
       parameters:
-      - in: "path"
-        name: "eventId"
-        type: string
-        required: true
-        description: eventIdentifier of the eventFamilyStats to get
+        - in: "path"
+          name: "eventId"
+          type: string
+          required: true
+          description: eventIdentifier of the event to get
       operationId: 'getEventFamilyStats'
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         200:
           description: "OK"
           schema:
             $ref: "#/definitions/FamilyStats"
       security:
-      - token: []
+        - token: []
 securityDefinitions:
   token:
     type: "apiKey"
     name: "x-access-token"
     in: "header"
 definitions:
+  AddEvent:
+    type: 'object'
+    properties:
+      name:
+        type: "string"
+      identifier:
+        type: "string"
   UserChange:
     type: "object"
     properties:
@@ -101,6 +133,8 @@ definitions:
         type: "string"
       email:
         type: "string"
+      amount:
+        type: "number"
       name:
         type: "object"
         properties:
@@ -152,3 +186,5 @@ definitions:
         type: "number"
       totalPeopleDays:
         type: "number"
+      name:
+        type: "string"

@@ -31,13 +31,14 @@ MongoClient.connect(dbURL, (err, mongoClient) => {
         res.send('Hey there Alpacas!');
     });
 
-    server.get("/user/google", passport.authenticate('google', {scope: ['openid email profile']}))
+    server.get("/user/google", passport.authenticate('google', {scope: ['openid email profile']}));
     server.get('/user/google/callback', authController.googleCallback);
     server.get('/user/getProfile', isAuthenticated, authController.getProfile);
 
     server.post('/control/changeProfile', isAuthenticated, controlController.changeProfile);
 
-    server.get('/eventFamilyStats/:eventId/getFamilyStats', isAuthenticatedAndAuthorizedEvent, eventController.getFamilyStats)
+    server.post('/event/addEvent', isAuthenticated, eventController.addEvent);
+    server.get('/event/:eventId/getFamilyStats', isAuthenticatedAndAuthorizedEvent, eventController.getFamilyStats);
 
         server.listen(4000, () => {
         console.log('LabCode FEINT backend is listening on 4000');

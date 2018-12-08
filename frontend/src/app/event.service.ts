@@ -19,7 +19,7 @@ export class EventService {
   public getFamilyStats(eventId) {
       return new Promise((resolve, reject) => {
         if (this.getCookie("lbcd_session")) {
-          axios.get(environment.apiServer + "/eventFamilyStats/" + eventId + "/getFamilyStats", {headers: {'x-access-token': this.getCookie("lbcd_session")}}).then((httpResponse) => {
+          axios.get(environment.apiServer + "/event/" + eventId + "/getFamilyStats", {headers: {'x-access-token': this.getCookie("lbcd_session")}}).then((httpResponse) => {
             resolve(httpResponse.data);
           }).catch((httpError) => {
             reject(httpError)
@@ -28,5 +28,19 @@ export class EventService {
           reject("error")
         }
       });
+  }
+
+  public addEvent(identifier, name) {
+    return new Promise((resolve, reject) => {
+      if (this.getCookie("lbcd_session")) {
+        axios.post(environment.apiServer + "/event/addEvent", {identifier: identifier, name: name} ,{headers: {'x-access-token': this.getCookie("lbcd_session")}}).then((httpResponse) => {
+          resolve(httpResponse.data);
+        }).catch((httpError) => {
+          reject(httpError)
+        })
+      } else {
+        reject("error")
+      }
+    });
   }
 }
