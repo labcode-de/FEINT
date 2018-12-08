@@ -51,6 +51,8 @@ export class UserService {
       firstName: firstName,
       familyName: familyName
     }, {headers: {'x-access-token': this.getCookie("lbcd_session")}}).then(() => {
+      this.user.firstName = firstName;
+      this.user.familyName = familyName;
       //OK
     }).catch((err) => {
       console.log('Change UserProfile Error: ' + err)
