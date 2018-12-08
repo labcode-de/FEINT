@@ -29,7 +29,6 @@ const googleStrategy = (passport, db) => {
                             }
                         })
                     }
-                    console.log(user);
                     return done(null, user);
                 }
             );

@@ -59,6 +59,7 @@ const getFamilyStats = (req, res) => {
                     httpResponse.totalAmount = totalAmount;
                     httpResponse.totalDebit = totalDebit;
                     httpResponse.totalPeopleDays = totalPeopleDays;
+                    httpResponse.privateCode = dbResEvent.privateCode;
                     httpResponse.name = dbResEvent.name;
                     res.send(httpResponse)
                 }
