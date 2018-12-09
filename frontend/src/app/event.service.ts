@@ -30,10 +30,10 @@ export class EventService {
       });
   }
 
-  public addEvent(identifier, name) {
+  public createEvent(identifier, name) {
     return new Promise((resolve, reject) => {
       if (this.getCookie("lbcd_session")) {
-        axios.post(environment.apiServer + "/event/addEvent", {identifier: identifier, name: name} ,{headers: {'x-access-token': this.getCookie("lbcd_session")}}).then((httpResponse) => {
+        axios.post(environment.apiServer + "/event/createEvent", {identifier: identifier, name: name} ,{headers: {'x-access-token': this.getCookie("lbcd_session")}}).then((httpResponse) => {
           resolve(httpResponse.data);
         }).catch((httpError) => {
           reject(httpError)
@@ -42,5 +42,19 @@ export class EventService {
         reject("error")
       }
     });
+  }
+
+  public addTokenEvent(token) {
+    return new Promise((resolve, reject) => {
+      if (this.getCookie("lbcd_session")) {
+        axios.post(environment.apiServer + "/event/addTokenEvent", {token:token} ,{headers: {'x-access-token': this.getCookie("lbcd_session")}}).then((httpResponse) => {
+          resolve(httpResponse.data);
+        }).catch((httpError) => {
+          reject(httpError)
+        })
+      } else {
+        reject("error")
+      }
+    })
   }
 }

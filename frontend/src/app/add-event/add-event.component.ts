@@ -12,21 +12,34 @@ declare let M: any;
 })
 export class AddEventComponent implements OnInit {
 
-  identifer: String;
-  name: String;
+  create_identifier: String;
+  create_name: String;
+  token_inviteCode: String;
 
   constructor(private eventService: EventService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
   }
 
-  send() {
-    this.eventService.addEvent(this.identifer, this.name).then(() => {
+  token_send() {
+    this.eventService.addTokenEvent(this.token_inviteCode).then(() => {
       this.userService.getUser();
-      this.router.navigate(["/", "event", this.identifer]);
+      this.router.navigate(["/", "event", this.token_inviteCode.split("_")[0]]);
+    }).catch((err) => {
+      if(err.response.status === 400 && err.response.data === "Token incorrect") {
+        $('#token-event-token').addClass('invalid');
+        M.toast({html: "Der Token ist falsch"});
+      }
+    })
+  }
+
+  create_send() {
+    this.eventService.createEvent(this.create_identifier, this.create_name).then(() => {
+      this.userService.getUser();
+      this.router.navigate(["/", "event", this.create_identifier]);
     }).catch((err) => {
       if(err.response.status === 400 && err.response.data === "Identifier used") {
-        $('#add-event-identifier').addClass('invalid');
+        $('#create-event-identifier').addClass('invalid');
         M.toast({html: "Die ID ist bereits genutzt"});
       }
     })

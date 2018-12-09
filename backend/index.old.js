@@ -29,7 +29,7 @@ var upload = multer({
         },
         filename: (req, file, cb) => {
             let customFileName = sha256(file.originalname.split('.')[0] + genString()),
-                fileExtension = file.originalname.split('.')[1] // get file extension from original file name
+                fileExtension = file.originalname.split('.')[1] // get file extension from original file create_name
             cb(null, customFileName + '.' + fileExtension)
         }
     })
@@ -172,7 +172,7 @@ MongoClient.connect(dbURL, (err, mongoClient) => {
                         gesAusgaben += parseFloat(familie.einkaeufe[familieEinkaeufeI].betrag);
                     }
                     if (parseInt(dbResI) + 1 === parseInt(dbRes.length)) {
-                        //res.send({ausgaben: gesAusgaben, personen: gesPersonen})
+                        //res.create_send({ausgaben: gesAusgaben, personen: gesPersonen})
                         response.gesAusgaben = gesAusgaben;
                         response.gesPersonen = gesPersonen;
                         for (let dbResII in dbRes) {
@@ -254,7 +254,7 @@ MongoClient.connect(dbURL, (err, mongoClient) => {
                     gesAusgaben += parseFloat(familie.einkaeufe[familieEinkaeufeI].betrag);
                 }
                 if (parseInt(dbResI) + 1 === parseInt(dbRes.length)) {
-                    //res.send({ausgaben: gesAusgaben, personen: gesPersonen})
+                    //res.create_send({ausgaben: gesAusgaben, personen: gesPersonen})
                     for (let dbResII in dbRes) {
                         const familieII = dbRes[dbResII];
                         const familieIIPersonenTage = familieII.anzPersonen * familieII.tage

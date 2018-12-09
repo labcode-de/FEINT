@@ -37,7 +37,8 @@ MongoClient.connect(dbURL, (err, mongoClient) => {
 
     server.post('/control/changeProfile', isAuthenticated, controlController.changeProfile);
 
-    server.post('/event/addEvent', isAuthenticated, eventController.addEvent);
+    server.post('/event/createEvent', isAuthenticated, eventController.createEvent);
+    server.post('/event/addTokenEvent', isAuthenticated, eventController.addTokenEvent);
     server.get('/event/:eventId/getFamilyStats', isAuthenticatedAndAuthorizedEvent, eventController.getFamilyStats);
 
         server.listen(4000, () => {

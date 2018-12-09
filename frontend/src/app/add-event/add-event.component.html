@@ -1,19 +1,33 @@
 <div>
   <div class="container">
-    <h2 class="center thin">Veranstaltung hinzuf&uuml;gen</h2>
-    <div class="row">
-      <div class="col s12 input-field">
-        <input type="text" id="add-event-nameEvent" [(ngModel)]="name">
-        <label for="add-event-nameEvent">Name
-          der Veranstaltung</label>
+    <section class="create-event">
+      <h2 class="center thin">Veranstaltung erstellen</h2>
+      <div class="row">
+        <div class="col s12 input-field">
+          <input type="text" id="create-event-nameEvent" [(ngModel)]="create_name">
+          <label for="create-event-nameEvent">Name
+            der Veranstaltung</label>
+        </div>
+        <div class="col s12 input-field">
+          <input type="text" id="create-event-identifier" [(ngModel)]="create_identifier">
+          <label for="create-event-identifier">ID</label>
+        </div>
       </div>
-      <div class="col s12 input-field">
-        <input type="text" id="add-event-identifier" [(ngModel)]="identifer">
-        <label for="add-event-identifier">ID</label>
+      <div class="center">
+        <button class="btn-large waves-effect" (click)="create_send()">Absenden</button>
       </div>
-    </div>
-    <div class="center">
-      <button class="btn-large waves-effect" (click)="send()">Absenden</button>
-    </div>
+    </section>
+    <section class="add-event-token">
+      <h2 class="center thin">Verstaltung mit Code hinzufügen</h2>
+      <div class="row">
+        <div class="col s12 input-field">
+          <input type="text" id="token-event-token" [(ngModel)]="token_inviteCode"><label for="token-event-token">Invite
+          Code</label>
+        </div>
+      </div>
+      <div class="center">
+        <button class="btn-large waves-effect" (click)="token_send()">Absenden</button>
+      </div>
+    </section>
   </div>
 </div>

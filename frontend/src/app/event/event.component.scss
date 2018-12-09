@@ -2,7 +2,18 @@ td.table-diff-plus {
   background-color: #2e7d32;
   color: #fff;
 }
+
 td.table-diff-minus {
   background-color: #b71c1c;
   color: #fff;
+}
+
+.tabs {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.btn-large {
+  background-color: #ef6c00;
 }

@@ -69,7 +69,7 @@ const getFamilyStats = (req, res) => {
 };
 module.exports.getFamilyStats = getFamilyStats;
 
-const addEvent = (req, res) => {
+const createEvent = (req, res) => {
     db.collection('events').find({identifier: req.body.identifier}).toArray((err, dbResEvents) => {
         if (err) {
             console.log(err);
@@ -103,4 +103,30 @@ const addEvent = (req, res) => {
         }
     })
 };
-module.exports.addEvent = addEvent;
+module.exports.createEvent = createEvent;
+
+const addTokenEvent = (req, res) => {
+    let eventIdentifier = req.body.token.split("_")[0];
+    let privateCode = req.body.token.split("_")[1];
+    db.collection('events').findOne({identifier: eventIdentifier, privateCode: privateCode}, (err, dbResEvent) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send("db error |||| " + err)
+        } else {
+            if(dbResEvent === null || dbResEvent === undefined || req.inspector.user.allowedEvents.some(e => e.eventId.toString() === dbResEvent._id.toString())) {
+                res.status(400).send("Token incorrect")
+            } else {
+                db.collection('users').updateOne({_id: ObjectID(req.inspector.user._id)}, {$push: {allowedEvents: {eventId: dbResEvent._id, people: 0, days: 0}}}, ((err) => {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).send("db error |||| " + err)
+                    } else {
+                        res.send("OK")
+                    }
+                }));
+            }
+        }
+    })
+};
+
+module.exports.addTokenEvent = addTokenEvent;

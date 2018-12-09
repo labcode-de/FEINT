@@ -1,23 +1,32 @@
 <div *ngIf="dataLoaded | async">
   <h1 class="center thin">{{eventFamilyStats.name}} - Konten</h1>
-  <table class="centered highlight responsive-table">
-    <thead>
-    <tr>
-      <th>Familie</th>
-      <th>Tage</th>
-      <th>Soll</th>
-      <th>Ist</th>
-      <th>Differenz</th>
-    </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let family of eventFamilyStats.families">
-        <td>{{ family.name }} ({{family.numPeople}} P.)</td>
-        <td>{{ family.numDays }}</td>
-        <td>{{ family.debit }} &euro;</td>
-        <td>{{ family.currentAmount }} &euro;</td>
-        <td [ngClass]="{'table-diff-plus': family.currentAmount - family.debit > 0, 'table-diff-minus': family.currentAmount - family.debit < 0}">{{ family.currentAmount - family.debit }}</td>
+  <div id="events-tabs-tab-1">
+    <table class="centered highlight responsive-table">
+      <thead>
+      <tr>
+        <th>Familie</th>
+        <th>Tage</th>
+        <th>Soll</th>
+        <th>Ist</th>
+        <th>Differenz</th>
       </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <tr *ngFor="let family of eventFamilyStats.families">
+          <td>{{ family.name }} ({{family.numPeople}} P.)</td>
+          <td>{{ family.numDays }}</td>
+          <td>{{ family.debit }} &euro;</td>
+          <td>{{ family.currentAmount }} &euro;</td>
+          <td [ngClass]="{'table-diff-plus': family.currentAmount - family.debit > 0, 'table-diff-minus': family.currentAmount - family.debit < 0}">{{ family.currentAmount - family.debit }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="events-tabs-tab-2" class="container">
+    <h2 class="center"><span class="thin">Invite Code: </span>{{ eventIdentifier }}_{{ eventFamilyStats.privateCode }}</h2>
+  </div>
+  <ul class="tabs row">
+    <li class="tab col s6"><a class="active" href="#events-tabs-tab-1">Dashboard</a></li>
+    <li class="tab col s6"><a href="#events-tabs-tab-2">Admin</a></li>
+  </ul>
 </div>

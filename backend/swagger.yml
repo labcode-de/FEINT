@@ -54,7 +54,7 @@ paths:
           description: "DB Error"
       security:
         - token: []
-  /event/addEvent:
+  /event/createEvent:
     post:
       tags:
         - "event"
@@ -66,8 +66,8 @@ paths:
           name: body
           description: ""
           schema:
-            $ref: "#/definitions/AddEvent"
-      operationId: 'addEvent'
+            $ref: "#/definitions/CreateEvent"
+      operationId: 'createEvent'
       produces:
         - "application/json"
       responses:
@@ -75,6 +75,31 @@ paths:
           description: "OK"
         400:
           description: "Identifier used"
+        401:
+          description: "Unauthorized"
+      security:
+        - token: []
+  /event/addTokenEvent:
+    post:
+      tags:
+        - "event"
+      summary: "add event"
+      description: ""
+      parameters:
+        - in: body
+          required: true
+          name: body
+          description: ""
+          schema:
+            $ref: "#/definitions/AddTokenEvent"
+      operationId: 'Event'
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Token incorrect"
         401:
           description: "Unauthorized"
       security:
@@ -107,12 +132,17 @@ securityDefinitions:
     name: "x-access-token"
     in: "header"
 definitions:
-  AddEvent:
+  CreateEvent:
     type: 'object'
     properties:
       name:
         type: "string"
       identifier:
+        type: "string"
+  AddTokenEvent:
+    type: 'object'
+    properties:
+      token:
         type: "string"
   UserChange:
     type: "object"
