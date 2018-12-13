@@ -5,7 +5,16 @@ const passport = require("passport");
 const ObjectID = require("mongodb").ObjectID;
 const db = require('../index').db;
 const setCookie = (res, user) => {
-    const userData = {id: user._id, service_id: user.service_id, service: user.authenticatedServices};
+    let userData;
+    if (user.origin === "insert") {
+        userData = {
+            id: user.ops[0]._id,
+            service_id: user.ops[0].service_id,
+            service: user.ops[0].authenticatedServices
+        };
+    } else {
+        userData = {id: user._id, service_id: user.service_id, service: user.authenticatedServices};
+    }
 
     const tokenData = {
         user: userData
@@ -22,9 +31,10 @@ const googleCallback = (req, res, next) => {
         if (err) return next(err);
         if (!user) {
             return res.redirect('http://localhost:40021/login');
+        } else {
+            setCookie(res, user);
+            res.redirect('http://localhost:40021');
         }
-        setCookie(res, user)
-        res.redirect('http://localhost:40021');
 
     })(req, res, next);
 };
@@ -44,7 +54,7 @@ const getProfile = (req, res) => {
     db.collection("events").find({'_id': {$in: allowedEventIDs}}).toArray((err, dbRes) => {
         let user = Object.assign({}, req.inspector.user);
         dbRes.forEach((event) => {
-            if(allowedEventIDsString.includes(event._id.toString())) {
+            if (allowedEventIDsString.includes(event._id.toString())) {
                 let amount = 0;
                 for (let purchaseI in event.purcharses) {
                     const purchase = event.purcharses[purchaseI];

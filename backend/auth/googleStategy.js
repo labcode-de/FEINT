@@ -14,7 +14,7 @@ const googleStrategy = (passport, db) => {
                         return done(err);
                     }
                     if (!user) {
-                        db.collection('users').insert({
+                        db.collection('users').insertOne({
                             service_id: profile.id,
                             authenticatedServices: "google",
                             email: profile.emails[0].value,
@@ -25,11 +25,13 @@ const googleStrategy = (passport, db) => {
                             if(err) {
                                 return done(err);
                             } else {
+                                dbInsertRes.origin = "insert";
                                 return done(null, dbInsertRes)
                             }
                         })
+                    } else {
+                        return done(null, user);
                     }
-                    return done(null, user);
                 }
             );
         }
