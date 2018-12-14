@@ -58,7 +58,7 @@ paths:
     post:
       tags:
         - "event"
-      summary: "add event"
+      summary: "create event"
       description: ""
       parameters:
         - in: body
@@ -83,7 +83,7 @@ paths:
     post:
       tags:
         - "event"
-      summary: "add event"
+      summary: "add event via token"
       description: ""
       parameters:
         - in: body
@@ -92,7 +92,7 @@ paths:
           description: ""
           schema:
             $ref: "#/definitions/AddTokenEvent"
-      operationId: 'Event'
+      operationId: 'addTokenEvent'
       produces:
         - "application/json"
       responses:
@@ -104,7 +104,37 @@ paths:
           description: "Unauthorized"
       security:
         - token: []
-  /event/{eventId}/getFamilyStats:
+  /event/{eventIdentifier}/changeUserEventDetails:
+    post:
+      tags:
+        - "event"
+      summary: "change user event details"
+      description: ""
+      parameters:
+        - in: body
+          required: true
+          name: body
+          description: ""
+          schema:
+            $ref: "#/definitions/ChangeUserEventDetails"
+        - in: "path"
+          name: "eventIdentifier"
+          type: string
+          required: true
+          description: eventIdentifier of the event to get
+      operationId: 'changeusereventdetails'
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Malformed Request"
+        401:
+          description: "Unauthorized"
+      security:
+        - token: []
+  /event/{eventIdentifier}/getFamilyStats:
     get:
       tags:
         - "event"
@@ -112,7 +142,7 @@ paths:
       description: ""
       parameters:
         - in: "path"
-          name: "eventId"
+          name: "eventIdentifier"
           type: string
           required: true
           description: eventIdentifier of the event to get
@@ -144,6 +174,13 @@ definitions:
     properties:
       token:
         type: "string"
+  ChangeUserEventDetails:
+    type: 'object'
+    properties:
+      persons:
+        type: "number"
+      days:
+        type: "number"
   UserChange:
     type: "object"
     properties:

@@ -3,10 +3,19 @@
     margin: auto !important;
   }
 }
+
 body {
   font-family: 'Roboto', sans-serif !important;
 }
 
-.btn,.btn-large {
+.btn, .btn-large {
   background-color: #ef6c00 !important;
+}
+
+.tabs.event-tabs {
+  .indicator {
+    bottom: inherit;
+    top: 0;
+    background-color: #ef6c00;
+  }
 }

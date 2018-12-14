@@ -57,4 +57,18 @@ export class EventService {
       }
     })
   }
+
+  public changeUserEventDetails(persons, days, eventIdentifier) {
+    return new Promise((resolve, reject) => {
+      if (this.getCookie('lbcd_session')) {
+        axios.post(environment.apiServer + "/event/" + eventIdentifier + "/changeUserEventDetails", {persons:persons,days: days}, {headers: {"x-access-token": this.getCookie("lbcd_session")}}).then((httpResponse) => {
+          resolve(httpResponse.data);
+        }).catch((httpError) => {
+          reject(httpError);
+        })
+      } else {
+        reject('error');
+      }
+    })
+  }
 }

@@ -12,21 +12,36 @@
       </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let family of eventFamilyStats.families">
-          <td>{{ family.name }} ({{family.numPeople}} P.)</td>
-          <td>{{ family.numDays }}</td>
-          <td>{{ family.debit }} &euro;</td>
-          <td>{{ family.currentAmount }} &euro;</td>
-          <td [ngClass]="{'table-diff-plus': family.currentAmount - family.debit > 0, 'table-diff-minus': family.currentAmount - family.debit < 0}">{{ family.currentAmount - family.debit }}</td>
-        </tr>
+      <tr *ngFor="let family of eventFamilyStats.families">
+        <td>{{ family.name }} ({{family.numPeople}} P.)</td>
+        <td>{{ family.numDays }}</td>
+        <td>{{ family.debit }} &euro;</td>
+        <td>{{ family.currentAmount }} &euro;</td>
+        <td
+          [ngClass]="{'table-diff-plus': family.currentAmount - family.debit > 0, 'table-diff-minus': family.currentAmount - family.debit < 0}">{{ family.currentAmount - family.debit }}</td>
+      </tr>
       </tbody>
-    </table>
+    </table>f
   </div>
   <div id="events-tabs-tab-2" class="container">
-    <h2 class="center"><span class="thin">Invite Code: </span>{{ eventIdentifier }}_{{ eventFamilyStats.privateCode }}</h2>
+    <h2 class="center"><span class="thin">Invite Code: </span>{{ eventIdentifier }}_{{ eventFamilyStats.privateCode }}
+    </h2>
+    <h3 class="thin">Daten &auml;ndern:</h3>
+    <div class="row">
+      <div class="col s12 m6 input-field">
+        <input type="number" id="event-tab-2-people" onKeyPress="if(this.value.length===2) return false;" [(ngModel)]="eventUserPerson">
+        <label for="event-tab-2-people">Personen</label></div>
+      <div class="col s12 m6 input-field">
+        <input type="number" id="event-tab-2-days" onKeyPress="if(this.value.length===2) return false" [(ngModel)]="eventUserDays">
+        <label for="event-tab-2-days">Tage</label>
+      </div>
+    </div>
+    <div class="row center">
+      <button class="btn-large" (click)="changeEventUserData()">Absenden</button>
+    </div>
   </div>
-  <ul class="tabs row">
+  <ul class="tabs row event-tabs">
     <li class="tab col s6"><a class="active" href="#events-tabs-tab-1">Dashboard</a></li>
-    <li class="tab col s6"><a href="#events-tabs-tab-2">Admin</a></li>
+    <li class="tab col s6"><a href="#events-tabs-tab-2">Einstellungen</a></li>
   </ul>
 </div>

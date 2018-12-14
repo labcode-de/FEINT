@@ -12,8 +12,14 @@ td.table-diff-minus {
   position: absolute;
   bottom: 0;
   left: 0;
-}
+  li a {
+    &.active, &:hover {
+      color: #ef6c00;
+    }
+    &:focus {
+      background-color: inherit;
+    }
 
-.btn-large {
-  background-color: #ef6c00;
+    color: #000000;
+  }
 }

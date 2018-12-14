@@ -33,7 +33,7 @@ const isAuthenticated = (req, res, next) => {
 module.exports.isAuthenticated = isAuthenticated;
 const isAuthenticatedAndAuthorizedEvent = (req, res, next) => {
     const token = req.headers['x-access-token'];
-    const eventId = req.params.eventId;
+    const eventId = req.params.eventIdentifier;
     let error = false;
     if (token) {
         try {

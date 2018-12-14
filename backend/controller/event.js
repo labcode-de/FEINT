@@ -3,7 +3,7 @@ const ObjectID = require('mongodb').ObjectID;
 const generateString = require('../helper/generateString').generateString;
 
 const getFamilyStats = (req, res) => {
-    db.collection("events").findOne({"identifier": req.params.eventId}, (err, dbResEvent) => {
+    db.collection("events").findOne({"identifier": req.params.eventIdentifier}, (err, dbResEvent) => {
         if (err) {
             console.log(err);
             res.status(500).send("db error |||| " + err)
@@ -89,7 +89,15 @@ const createEvent = (req, res) => {
                         console.log(err);
                         res.status(500).send("db error |||| " + err)
                     } else {
-                        db.collection('users').updateOne({_id: ObjectID(req.inspector.user._id)}, {$push: {allowedEvents: {eventId: dbResEventAdd.insertedId, people: 0, days: 0}}}, ((err) => {
+                        db.collection('users').updateOne({_id: ObjectID(req.inspector.user._id)}, {
+                            $push: {
+                                allowedEvents: {
+                                    eventId: dbResEventAdd.insertedId,
+                                    people: 0,
+                                    days: 0
+                                }
+                            }
+                        }, ((err) => {
                             if (err) {
                                 console.log(err);
                                 res.status(500).send("db error |||| " + err)
@@ -113,10 +121,18 @@ const addTokenEvent = (req, res) => {
             console.log(err);
             res.status(500).send("db error |||| " + err)
         } else {
-            if(dbResEvent === null || dbResEvent === undefined || req.inspector.user.allowedEvents.some(e => e.eventId.toString() === dbResEvent._id.toString())) {
+            if (dbResEvent === null || dbResEvent === undefined || req.inspector.user.allowedEvents.some(e => e.eventId.toString() === dbResEvent._id.toString())) {
                 res.status(400).send("Token incorrect")
             } else {
-                db.collection('users').updateOne({_id: ObjectID(req.inspector.user._id)}, {$push: {allowedEvents: {eventId: dbResEvent._id, people: 0, days: 0}}}, ((err) => {
+                db.collection('users').updateOne({_id: ObjectID(req.inspector.user._id)}, {
+                    $push: {
+                        allowedEvents: {
+                            eventId: dbResEvent._id,
+                            people: 0,
+                            days: 0
+                        }
+                    }
+                }, ((err) => {
                     if (err) {
                         console.log(err);
                         res.status(500).send("db error |||| " + err)
@@ -130,3 +146,36 @@ const addTokenEvent = (req, res) => {
 };
 
 module.exports.addTokenEvent = addTokenEvent;
+
+const changeUserEventDetails = (req, res) => {
+    if (req.body.persons && req.body.days) {
+        db.collection('events').findOne({identifier: req.params.eventIdentifier}, (err, dbResEvent) => {
+            if (err) {
+                console.log(err);
+                res.status(500).send("db error |||| " + err)
+            } else {
+                db.collection("users").updateOne({
+                        _id: ObjectID(req.inspector.user._id),
+                        'allowedEvents.eventId': ObjectID(dbResEvent._id)
+                    }, {
+                        $set: {
+                            "allowedEvents.$.people": req.body.persons,
+                            "allowedEvents.$.days": req.body.days
+                        }
+                    }, ((err) => {
+                        if (err) {
+                            console.log(err);
+                            res.status(500).send("db error |||| " + err)
+                        } else {
+                            res.send("OK")
+                        }
+                    })
+                )
+            }
+        })
+    } else {
+        res.status(400).send("Malformed Request");
+    }
+}
+
+module.exports.changeUserEventDetails = changeUserEventDetails;
