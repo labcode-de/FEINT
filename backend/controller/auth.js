@@ -5,26 +5,28 @@ const passport = require("passport");
 const ObjectID = require("mongodb").ObjectID;
 const db = require('../index').db;
 const setCookie = (res, user) => {
-    let userData;
-    if (user.origin === "insert") {
-        userData = {
-            id: user.ops[0]._id,
-            service_id: user.ops[0].service_id,
-            service: user.ops[0].authenticatedServices
+    if(user !== null) {
+        let userData;
+        if (user.origin === "insert") {
+            userData = {
+                id: user.ops[0]._id,
+                service_id: user.ops[0].service_id,
+                service: user.ops[0].authenticatedServices
+            };
+        } else {
+            userData = {id: user._id, service_id: user.service_id, service: user.authenticatedServices};
+        }
+
+        const tokenData = {
+            user: userData
         };
-    } else {
-        userData = {id: user._id, service_id: user.service_id, service: user.authenticatedServices};
+
+        const token = jwt.sign(tokenData,
+            auth_config.jwt_token.secret,
+            {expiresIn: auth_config.jwt_token.expiresIn});
+
+        res.cookie(auth_config.jwt_token.cookie_name, token, {expires: new Date(Date.now() + 2628000000)});
     }
-
-    const tokenData = {
-        user: userData
-    };
-
-    const token = jwt.sign(tokenData,
-        auth_config.jwt_token.secret,
-        {expiresIn: auth_config.jwt_token.expiresIn});
-
-    res.cookie(auth_config.jwt_token.cookie_name, token, {expires: new Date(Date.now() + 2628000000)});
 };
 const googleCallback = (req, res, next) => {
     passport.authenticate('google', {failureRedirect: 'https://feint.labcode.de/login'}, (err, user, info) => {
