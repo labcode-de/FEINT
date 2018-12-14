@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {User} from "./user";
 import axios from 'axios'
 import {environment} from "../environments/environment";
@@ -11,7 +11,9 @@ export class UserService {
   public user: User;
   public isAuthenticated: boolean;
   private loaded: boolean = false;
-  constructor() { }
+
+  constructor() {
+  }
 
   private getCookie(name) {
     const regex = new RegExp(name + "=([^;]+)");
@@ -19,10 +21,15 @@ export class UserService {
     return (value != null) ? unescape(value[1]) : null;
   }
 
+  public forceGetUser() {
+    this.loaded = false;
+    this.getUser();
+  }
+
   public getUser() {
     return new Promise((resolve, reject) => {
       if (!this.loaded) {
-        if(this.getCookie("lbcd_session")) {
+        if (this.getCookie("lbcd_session")) {
           axios.get(environment.apiServer + "/user/getProfile", {headers: {'x-access-token': this.getCookie("lbcd_session")}}).then((httpResponse) => {
             this.isAuthenticated = true;
             this.user = new User(httpResponse);
@@ -46,7 +53,14 @@ export class UserService {
     })
   }
 
-  public changeUserProfile(firstName: String, familyName: String) {
+  public
+
+  changeUserProfile(firstName
+                      :
+                      String, familyName
+                      :
+                      String
+  ) {
     axios.post(environment.apiServer + "/control/changeProfile", {
       firstName: firstName,
       familyName: familyName

@@ -23,7 +23,7 @@ export class AddEventComponent implements OnInit {
 
   token_send() {
     this.eventService.addTokenEvent(this.token_inviteCode).then(() => {
-      this.userService.getUser();
+      this.userService.forceGetUser();
       this.router.navigate(["/", "event", this.token_inviteCode.split("_")[0]]);
     }).catch((err) => {
       if(err.response.status === 400 && err.response.data === "Token incorrect") {
@@ -35,7 +35,7 @@ export class AddEventComponent implements OnInit {
 
   create_send() {
     this.eventService.createEvent(this.create_identifier, this.create_name).then(() => {
-      this.userService.getUser();
+      this.userService.forceGetUser();
       this.router.navigate(["/", "event", this.create_identifier]);
     }).catch((err) => {
       if(err.response.status === 400 && err.response.data === "Identifier used") {
